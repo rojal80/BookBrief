@@ -4,15 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FragmentHome">
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
+
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="300dp"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/btnOpenDialog"
-        android:src="@drawable/baseline_add_24"
         />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

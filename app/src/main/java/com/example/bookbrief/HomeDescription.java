@@ -22,9 +22,9 @@ public class HomeDescription extends AppCompatActivity {
         txt2=findViewById(R.id.txt2);
 
 
-        img.setImageResource(getIntent().getIntExtra("imagename",0));
-        txt1.setText(getIntent().getStringExtra("name"));
-        txt2.setText(getIntent().getStringExtra("description"));
+        img.setImageResource(getIntent().getIntExtra("Image",0));
+        txt1.setText(getIntent().getStringExtra("Title"));
+        txt2.setText(getIntent().getStringExtra("Description"));
 
     }
 }

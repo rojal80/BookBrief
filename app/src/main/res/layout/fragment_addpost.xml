@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FragmentAddPost"
+    >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Title EditText -->
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Title"
+
+            android:layout_marginTop="10dp"
+
+            />
+
+        <!-- Description EditText -->
+        <EditText
+            android:id="@+id/editTextDescription"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/editTextTitle"
+            android:inputType="textMultiLine"
+            android:imeOptions="actionDone"
+            android:minLines="3"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:gravity="top"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="10dp"
+            android:hint="Description" />
+
+        <!-- Image ImageView -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/editTextDescription"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <!-- Add Image Button -->
+        <Button
+            android:id="@+id/buttonAddImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView"
+            android:layout_marginTop="16dp"
+            android:text="Add Image" />
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonAddImage"
+            android:layout_marginTop="16dp"
+            android:text="Save" />
+
+    </RelativeLayout>
+</FrameLayout>

@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,8 +30,8 @@ FloatingActionButton btnOpenDialog;
                 if(id==R.id.nav_home){
                     loadFrag(new FragmentHome(),false);
 
-                }else if(id==R.id.nav_search){
-                    loadFrag(new FragmentSearch(),false);
+                }else if(id==R.id.nav_addpost){
+                    loadFrag(new FragmentAddPost(),false);
 
                 }else if(id==R.id.nav_library){
                     loadFrag(new FragmentLibrary(),false);
@@ -44,7 +43,7 @@ FloatingActionButton btnOpenDialog;
                 return true;
             }
         });
-        bnView.setSelectedItemId(R.id.nav_profile);
+        bnView.setSelectedItemId(R.id.nav_home);
     }
     public void loadFrag(Fragment fragment,Boolean flag){
         FragmentManager fm=getSupportFragmentManager();
