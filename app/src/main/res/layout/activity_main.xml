@@ -23,7 +23,8 @@
         app:menu="@menu/nav_items"
         android:background="#ffffff"
         android:layout_alignParentBottom="true"
-
+        app:itemIconTint="@drawable/nav_tint_selector"
+        app:itemTextColor="@drawable/nav_tint_selector"
         />
 
 
