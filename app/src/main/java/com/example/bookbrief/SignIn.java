@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,7 +34,10 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         signInBtn=findViewById(R.id.signInBtn);
-        gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).requestEmail().build();
+        gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("791566273309-emkgr4m3g7jcf6edk5lrb6re7alpv015.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
         gsc= GoogleSignIn.getClient(this,gso);
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
@@ -66,11 +70,12 @@ public class SignIn extends AppCompatActivity {
                         }
                     }
                 });
-                navigateToMainActivity();
+//                navigateToMainActivity();
             } catch (ApiException e) {
                int errorCode=e.getStatusCode();
                String errorMessage=e.getMessage();
-                Toast.makeText(this, "Google Sign in failed. Error code"+errorCode+",Message:"+errorMessage, Toast.LENGTH_SHORT).show();
+                Log.d("ApiException", "onActivityResult: "+e.toString());
+                //Toast.makeText(this, "Google Sign in failed. Error code"+errorCode+",Message:"+errorMessage, Toast.LENGTH_SHORT).show();
             }
         }
     }

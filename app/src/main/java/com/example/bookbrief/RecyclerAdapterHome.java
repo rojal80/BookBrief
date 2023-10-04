@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,35 +37,25 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view=LayoutInflater.from(context.getContext()).inflate(R.layout.home_content,parent,false);
-        ViewHolder viewHolder=new ViewHolder(view);
 
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        final ContentModel temp=arrDetails.get(position);
-
 
 
         holder.txt1.setText(arrDetails.get(position).getTitle());
 
 
-        holder.cardHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(view.getContext(),HomeDescription.class);
-                // intent.putExtra("imagename",ContentModel.img);
-                //intent.putExtra("name",ContentModel.txt1);
-                //intent.putExtra("description",ContentModel.txt2);
-                //intent.putExtra("cardview",ContentModel.cardHome);
+        holder.cardHome.setOnClickListener(view -> {
+            Intent intent=new Intent(view.getContext(),HomeDescription.class);
 
-                intent .putExtra("Title",arrDetails.get(position).getTitle());
-                intent .putExtra("Description",arrDetails.get(position).getDescription());
+            intent .putExtra("Title",arrDetails.get(position).getTitle());
+            intent .putExtra("Description",arrDetails.get(position).getDescription());
 
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                view.getContext().startActivity(intent);
-            }
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            view.getContext().startActivity(intent);
         });
     }
 
@@ -88,7 +77,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
             }
             else{
                 for(ContentModel obj:backup){
-                    if(obj.getTitle().toString().toLowerCase().contains(keyword.toString().toLowerCase()))
+                    if(obj.getTitle().toLowerCase().contains(keyword.toString().toLowerCase()))
                         filtereddata.add(obj);
                 }
             }
@@ -97,6 +86,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
             return results;
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults results) {
             arrDetails.clear();
@@ -106,7 +96,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
         }
     };
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView txt1,txt2;
 
         CardView cardHome;

@@ -54,7 +54,7 @@ FloatingActionButton btnOpenDialog;
         FragmentManager fm=getSupportFragmentManager();
         FragmentTransaction ft=fm.beginTransaction();
         if(flag)
-        ft.add(R.id.container,fragment);
+            ft.add(R.id.container,fragment);
         else
             ft.replace(R.id.container,fragment);
         ft.commit();
