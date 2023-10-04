@@ -29,7 +29,7 @@ public class FragmentHome extends Fragment {
 
     ArrayList<ContentModel> arrDetails=new ArrayList<>();
     RecyclerView recyclerView;
-     private RecyclerAdapterHome adapter;
+    private RecyclerAdapterHome adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,18 +40,18 @@ public class FragmentHome extends Fragment {
         recyclerView=view1.findViewById(R.id.recyclerContent);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        arrDetails.add(new ContentModel("This is Life","We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("Love of Life", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel(" My Life", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("Manifestation", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("Surrounding", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("Environment", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("JavaScript", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("Virtual Reality", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("Animation", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("Broadcast Agency", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-        arrDetails.add(new ContentModel("Zombie attack", "We should enjoy every small things that are around us.",R.drawable.ic_launcher_background));
-         adapter=new RecyclerAdapterHome(this,arrDetails);
+        arrDetails.add(new ContentModel("This is Life","We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("Love of Life", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel(" My Life", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("Manifestation", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("Surrounding", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("Environment", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("JavaScript", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("Virtual Reality", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("Animation", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("Broadcast Agency", "We should enjoy every small things that are around us."));
+        arrDetails.add(new ContentModel("Zombie attack", "We should enjoy every small things that are around us."));
+        adapter=new RecyclerAdapterHome(this,arrDetails);
         recyclerView.setAdapter(adapter);
         return view1;
 

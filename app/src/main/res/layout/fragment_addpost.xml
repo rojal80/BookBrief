@@ -1,70 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<!-- activity_homedescription.xml -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".FragmentAddPost"
-    >
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:id="@+id/textAdd"
+        android:layout_centerHorizontal="true"
+        android:text="Want to Add Post?"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_margin="25dp"/>
 
-        <!-- Title EditText -->
-        <EditText
-            android:id="@+id/editTextTitle"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Title"
 
-            android:layout_marginTop="10dp"
+    <EditText
+        android:id="@+id/editTitle"
+        android:layout_below="@+id/textAdd"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:hint="Enter Title"
+        android:background="@drawable/edittext_background"
+        android:inputType="textMultiLine"
+        android:minLines="2"/>
 
-            />
 
-        <!-- Description EditText -->
-        <EditText
-            android:id="@+id/editTextDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editTextTitle"
-            android:inputType="textMultiLine"
-            android:imeOptions="actionDone"
-            android:minLines="3"
-            android:maxLines="5"
-            android:scrollbars="vertical"
-            android:gravity="top"
-            android:layout_marginBottom="10dp"
-            android:hint="Description" />
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_below="@id/editTitle"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:hint="Write Your Summary Blog Here."
+        android:background="@drawable/edittext_background"
+        android:inputType="textMultiLine"
+        android:minLines="4" />
 
-        <!-- Image ImageView -->
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_below="@id/editTextDescription"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_launcher_background" />
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/editDescription"
+        android:layout_marginTop="10dp"
+        android:text="Post"
+        android:textSize="16sp"
+        android:background="@drawable/button_background" />
 
-        <!-- Add Image Button -->
-        <Button
-            android:id="@+id/buttonAddImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageView"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/black"
-            android:text="Add Image" />
-
-        <!-- Save Button -->
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/buttonAddImage"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/black"
-            android:text="Save" />
-
-    </RelativeLayout>
-</FrameLayout>
+</RelativeLayout>

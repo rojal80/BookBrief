@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 public class HomeDescription extends AppCompatActivity {
-    ImageView img;
+
     TextView txt1,txt2;
     CardView cardHome;
     @Override
@@ -17,12 +17,11 @@ public class HomeDescription extends AppCompatActivity {
         super.onCreate(b);
         setContentView(R.layout.activity_homedescription);
         getSupportActionBar().hide();
-        img=findViewById(R.id.img);
         txt1=findViewById(R.id.txt1);
         txt2=findViewById(R.id.txt2);
 
 
-        img.setImageResource(getIntent().getIntExtra("Image",0));
+
         txt1.setText(getIntent().getStringExtra("Title"));
         txt2.setText(getIntent().getStringExtra("Description"));
 

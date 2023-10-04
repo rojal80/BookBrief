@@ -21,6 +21,11 @@ FloatingActionButton btnOpenDialog;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bnView=findViewById(R.id.bnView);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_home, new FragmentHome())
+                    .commit();
+        }
 
 
         bnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

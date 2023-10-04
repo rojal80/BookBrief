@@ -7,10 +7,10 @@ public class ContentModel {
 
     private int img;
 
-    public ContentModel(String title, String description, int image) {
+    public ContentModel(String title, String description) {
         this.title=title;
         this.description=description;
-        this.img=image;
+
     }
 
     public String getTitle() {
@@ -29,13 +29,6 @@ public class ContentModel {
         this.description = description;
     }
 
-    public int getImg() {
-        return img;
-    }
-
-    public void setImg(int img) {
-        this.img = img;
-    }
 
     public static String cardHome;
 
