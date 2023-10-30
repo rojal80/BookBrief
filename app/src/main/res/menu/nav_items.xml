@@ -13,7 +13,12 @@
         android:title="Library"
         android:icon="@drawable/baseline_local_library_24"/>
     <item
+        android:id="@+id/nav_savepost"
+        android:title="SavedPost"
+        android:icon="@drawable/save"/>
+    <item
         android:id="@+id/nav_profile"
         android:title="Profile"
         android:icon="@drawable/user"/>
+
 </menu>

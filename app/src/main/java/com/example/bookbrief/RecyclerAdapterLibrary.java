@@ -4,8 +4,10 @@ package com.example.bookbrief;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,18 +27,22 @@ import com.orhanobut.dialogplus.DialogPlus;
 
 import java.util.ArrayList;
 
-public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHome.ViewHolder> implements Filterable {
-    FragmentHome context;
-    private Fragment fragment;
+public class RecyclerAdapterLibrary extends RecyclerView.Adapter<RecyclerAdapterLibrary.ViewHolder> implements Filterable {
+    FragmentLibrary context;
 
     ArrayList<ContentModel> arrDetails;
     ArrayList<ContentModel>backup;
+    private Fragment fragment;
 
 
-    public RecyclerAdapterHome(FragmentHome context, ArrayList<ContentModel> arrDetails){
+    public RecyclerAdapterLibrary(FragmentLibrary context, ArrayList<ContentModel> arrDetails){
         this.context=context;
+
         this.arrDetails=arrDetails;
         backup=new ArrayList<>(arrDetails);
+        if (context == null) {
+            Log.e("Adapter", "Context is null!");
+        }
     }
 
 
@@ -45,8 +51,10 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(context.getContext()).inflate(R.layout.home_content,parent,false);
-
+        View view=LayoutInflater.from(context.getContext()).inflate(R.layout.librarycontent,parent,false);
+        if (view.getContext() == null) {
+            Log.e("onCreateViewHolder", "Context in onCreateViewHolder is null!");
+        }
         return new ViewHolder(view);
     }
 
@@ -68,50 +76,52 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
             view.getContext().startActivity(intent);
         });
 
-//        holder.editpost.setOnClickListener(view -> {
-//            final DialogPlus dialogplus= DialogPlus.newDialog(holder.txt1.getContext())
-//                    .setContentHolder(new com.orhanobut.dialogplus.ViewHolder(R.layout.update_popup))
-//                    .setExpanded(true,1200).create();
-//
-//      EditText editTitle = (EditText) dialogplus.findViewById(R.id.editTitle);
-//        EditText editDescription = (EditText) dialogplus.findViewById(R.id.editDescription);
-//      ImageView editpost= (ImageView) dialogplus.findViewById(R.id.editpost);
-//            // Get the position of the clicked item
-//            int itemPosition = holder.getAdapterPosition();
-//            ContentModel contentModel = arrDetails.get(itemPosition);
-//
-//            // Populate the EditText fields with existing data
-//            editTitle.setText(contentModel.getTitle());
-//            editDescription.setText(contentModel.getDescription());
-//
-//            // Handle the editpost ImageView click here to save the edited data
-////            editpost.setOnClickListener(view1 -> {
-////
-////            });
-//
-//            dialogplus.show();
-//        });
+        holder.editpost.setOnClickListener(view -> {
+            if(holder.editpost!=null) {
+                final DialogPlus dialogplus = DialogPlus.newDialog(holder.txt1.getContext())
+                        .setContentHolder(new com.orhanobut.dialogplus.ViewHolder(R.layout.update_popup))
+                        .setExpanded(true, 1200).create();
 
-//        holder.deletepost.setOnClickListener(view -> {
-//            AlertDialog.Builder builder=new AlertDialog.Builder(holder.txt1.getContext());
-//            builder.setTitle("Are you sure you want to delete?");
-//            builder.setMessage("Deleted data can't be undo.");
-//            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
+                EditText editTitle = (EditText) dialogplus.findViewById(R.id.editTitle);
+                EditText editDescription = (EditText) dialogplus.findViewById(R.id.editDescription);
+                ImageView editpost = (ImageView) dialogplus.findViewById(R.id.editpost);
+                // Get the position of the clicked item
+                int itemPosition = holder.getAdapterPosition();
+                ContentModel contentModel = arrDetails.get(itemPosition);
+
+                // Populate the EditText fields with existing data
+                editTitle.setText(contentModel.getTitle());
+                editDescription.setText(contentModel.getDescription());
+
+                // Handle the editpost ImageView click here to save the edited data
+//            editpost.setOnClickListener(view1 -> {
 //
-//                }
 //            });
-//            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    Toast.makeText(holder.txt1.getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//            builder.show();
-//
-//
-//        });
+
+                dialogplus.show();
+            }
+        });
+
+        holder.deletepost.setOnClickListener(view -> {
+            AlertDialog.Builder builder=new AlertDialog.Builder(holder.txt1.getContext());
+            builder.setTitle("Are you sure you want to delete?");
+            builder.setMessage("Deleted data can't be undo.");
+            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(holder.txt1.getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.show();
+
+
+        });
     }
 
     @Override
@@ -154,15 +164,15 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView txt1,txt2;
         CardView cardHome;
-        ImageView saveimage;
+        ImageView editpost,deletepost,saveimage;
         public ViewHolder(View itemView){
 
             super(itemView);
             txt1=itemView.findViewById(R.id.txt1);
             txt2=itemView.findViewById(R.id.txt2);
             cardHome=itemView.findViewById(R.id.cardHome);
-//            editpost=itemView.findViewById(R.id.editpost);
-//            deletepost=itemView.findViewById(R.id.deletepost);
+            editpost=itemView.findViewById(R.id.editpost);
+            deletepost=itemView.findViewById(R.id.deletepost);
             saveimage=itemView.findViewById(R.id.saveImage);
         }
 

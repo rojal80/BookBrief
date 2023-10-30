@@ -39,7 +39,10 @@ FloatingActionButton btnOpenDialog;
                 }else if(id==R.id.nav_library){
                     loadFrag(new FragmentLibrary(),false);
 
-                }else{
+                } else if (id==R.id.nav_savepost) {
+                    loadFrag(new FragmentSaved(),false);
+
+                } else{
                     loadFrag(new FragmentProfile(),true);
 
                 }
