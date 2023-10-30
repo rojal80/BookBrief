@@ -38,22 +38,14 @@ public class FragmentProfile extends Fragment {
         logoutbtn=v.findViewById(R.id.logoutbtn);
         gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).requestEmail().build();
         gsc= GoogleSignIn.getClient(requireContext(),gso);
-        logoutbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-            }
-        });
+        logoutbtn.setOnClickListener(view -> signOut());
 
         return v;
 
     }
     private void signOut() {
         gsc.signOut()
-                .addOnCompleteListener(requireActivity(), task -> {
-
-                    navigateToSignInActivity();
-                });
+                .addOnCompleteListener(requireActivity(), task -> navigateToSignInActivity());
     }
 
     private void navigateToSignInActivity() {

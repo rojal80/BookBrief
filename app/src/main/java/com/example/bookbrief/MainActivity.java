@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 BottomNavigationView bnView;
 FloatingActionButton btnOpenDialog;
     @Override
@@ -23,11 +23,9 @@ FloatingActionButton btnOpenDialog;
         bnView=findViewById(R.id.bnView);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_home, new FragmentHome())
+                    .replace(R.id.container, new FragmentHome())
                     .commit();
         }
-
-
         bnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -54,10 +52,12 @@ FloatingActionButton btnOpenDialog;
         FragmentManager fm=getSupportFragmentManager();
         FragmentTransaction ft=fm.beginTransaction();
         if(flag)
-            ft.add(R.id.container,fragment);
+            ft.replace(R.id.container,fragment,"HomeFragmentTag");
         else
             ft.replace(R.id.container,fragment);
         ft.commit();
 
     }
+
+
 }

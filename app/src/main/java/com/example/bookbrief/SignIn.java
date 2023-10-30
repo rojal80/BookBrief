@@ -70,12 +70,11 @@ public class SignIn extends AppCompatActivity {
                         }
                     }
                 });
-//                navigateToMainActivity();
             } catch (ApiException e) {
                int errorCode=e.getStatusCode();
                String errorMessage=e.getMessage();
-                Log.d("ApiException", "onActivityResult: "+e.toString());
-                //Toast.makeText(this, "Google Sign in failed. Error code"+errorCode+",Message:"+errorMessage, Toast.LENGTH_SHORT).show();
+//                Log.d("ApiException", "onActivityResult: "+e.toString());
+                Toast.makeText(this, "Google Sign in failed. Error code"+errorCode+",Message:"+errorMessage, Toast.LENGTH_SHORT).show();
             }
         }
     }

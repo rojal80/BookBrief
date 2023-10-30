@@ -6,16 +6,15 @@
     android:orientation="vertical"
     tools:context=".FragmentLibrary"
     >
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appBarLayout">
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabLayout">
 
-        </com.google.android.material.tabs.TabLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-<include layout="@layout/contain_main"/>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/recyclerContent"-->
+<!--        />-->
+    <include layout="@layout/home_content" />
+
+
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -40,23 +41,20 @@ public class FragmentHome extends Fragment {
         recyclerView=view1.findViewById(R.id.recyclerContent);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        arrDetails.add(new ContentModel("This is Life","We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("Love of Life", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel(" My Life", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("Manifestation", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("Surrounding", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("Environment", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("JavaScript", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("Virtual Reality", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("Animation", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("Broadcast Agency", "We should enjoy every small things that are around us."));
-        arrDetails.add(new ContentModel("Zombie attack", "We should enjoy every small things that are around us."));
+          arrDetails.add(new ContentModel("This is Life","We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us."));
+          arrDetails.add(new ContentModel("Love of Life", "We should enjoy every small things that are around us."));
+          arrDetails.add(new ContentModel(" My Life", "We should enjoy every small things that are around us."));
+          arrDetails.add(new ContentModel("Manifestation", "We should enjoy every small things that are around us."));
+//        arrDetails.add(new ContentModel("Surrounding", "We should enjoy every small things that are around us."));
+//        arrDetails.add(new ContentModel("Environment", "We should enjoy every small things that are around us."));
+//        arrDetails.add(new ContentModel("JavaScript", "We should enjoy every small things that are around us."));
+//        arrDetails.add(new ContentModel("Virtual Reality", "We should enjoy every small things that are around us."));
+//        arrDetails.add(new ContentModel("Animation", "We should enjoy every small things that are around us."));
+//        arrDetails.add(new ContentModel("Broadcast Agency", "We should enjoy every small things that are around us."));
+//        arrDetails.add(new ContentModel("Zombie attack", "We should enjoy every small things that are around us."));
         adapter=new RecyclerAdapterHome(this,arrDetails);
         recyclerView.setAdapter(adapter);
         return view1;
-
-
-
     }
 
     @Override
@@ -77,6 +75,24 @@ public class FragmentHome extends Fragment {
                 return false;
             }
         });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+
+        public void addContent(ContentModel newContent) {
+            arrDetails.add(newContent);
+            adapter.notifyDataSetChanged();
+            showToast("Successfully Posted");
+        }
+    private void showToast(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+//    @Override
+//    public void onPostClicked(ContentModel newContent) {
+//        addContent(newContent);
+//    }
+//
 }
+

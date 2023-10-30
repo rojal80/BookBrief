@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textAdd"
+        android:layout_centerHorizontal="true"
+        android:text="Update Post?"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_margin="25dp"/>
+
+
+    <EditText
+        android:id="@+id/editTitle"
+        android:layout_below="@+id/textAdd"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:hint="Enter Title"
+        android:background="@drawable/edittext_background"
+        android:inputType="textMultiLine"
+        android:minLines="2"/>
+
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_below="@id/editTitle"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:hint="Write Your Summary Blog Here."
+        android:background="@drawable/edittext_background"
+        android:inputType="textMultiLine"
+        android:minLines="4" />
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/editDescription"
+        android:layout_marginTop="10dp"
+        android:text="Update"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:background="@drawable/button_background" />
+
+</RelativeLayout>

@@ -11,6 +11,7 @@ public class ContentModel {
         this.title=title;
         this.description=description;
 
+
     }
 
     public String getTitle() {
@@ -31,10 +32,6 @@ public class ContentModel {
 
 
     public static String cardHome;
-
-
-
-
 
 
 }
