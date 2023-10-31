@@ -33,6 +33,10 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            navigateToMainActivity();
+            return;
+        }
         signInBtn=findViewById(R.id.signInBtn);
         gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("791566273309-emkgr4m3g7jcf6edk5lrb6re7alpv015.apps.googleusercontent.com")
@@ -82,6 +86,13 @@ public class SignIn extends AppCompatActivity {
     private void navigateToMainActivity() {
 
         Intent intent=new Intent(SignIn.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        // Redirect to the sign-in page
+        Intent intent = new Intent(this, SignIn.class);
         startActivity(intent);
         finish();
     }

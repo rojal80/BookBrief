@@ -1,10 +1,8 @@
 package com.example.bookbrief;
 
 
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.orhanobut.dialogplus.DialogPlus;
@@ -32,7 +29,7 @@ public class RecyclerAdapterLibrary extends RecyclerView.Adapter<RecyclerAdapter
 
     ArrayList<ContentModel> arrDetails;
     ArrayList<ContentModel>backup;
-    private Fragment fragment;
+
 
 
     public RecyclerAdapterLibrary(FragmentLibrary context, ArrayList<ContentModel> arrDetails){

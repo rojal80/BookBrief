@@ -68,6 +68,14 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
             view.getContext().startActivity(intent);
         });
 
+        holder.saveImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(view.getContext(), "Post saved!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 //        holder.editpost.setOnClickListener(view -> {
 //            final DialogPlus dialogplus= DialogPlus.newDialog(holder.txt1.getContext())
 //                    .setContentHolder(new com.orhanobut.dialogplus.ViewHolder(R.layout.update_popup))
@@ -152,9 +160,10 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
     };
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
+
         TextView txt1,txt2;
         CardView cardHome;
-        ImageView saveimage;
+        ImageView saveImage;
         public ViewHolder(View itemView){
 
             super(itemView);
@@ -163,7 +172,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
             cardHome=itemView.findViewById(R.id.cardHome);
 //            editpost=itemView.findViewById(R.id.editpost);
 //            deletepost=itemView.findViewById(R.id.deletepost);
-            saveimage=itemView.findViewById(R.id.saveImage);
+            saveImage=itemView.findViewById(R.id.saveImage);
         }
 
     }

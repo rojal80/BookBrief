@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class FragmentProfile extends Fragment {
@@ -44,13 +45,16 @@ public class FragmentProfile extends Fragment {
 
     }
     private void signOut() {
-        gsc.signOut()
-                .addOnCompleteListener(requireActivity(), task -> navigateToSignInActivity());
+        FirebaseAuth.getInstance().signOut();
+        navigateToSignInActivity();
+//        gsc.signOut()
+//                .addOnCompleteListener(requireActivity(), task -> navigateToSignInActivity());
     }
 
     private void navigateToSignInActivity() {
         Intent intent = new Intent(requireContext(), SignIn.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        requireActivity().finish();
     }
 }
