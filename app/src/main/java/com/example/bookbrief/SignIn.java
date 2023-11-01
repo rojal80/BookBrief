@@ -41,6 +41,7 @@ public class SignIn extends AppCompatActivity {
         gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("791566273309-emkgr4m3g7jcf6edk5lrb6re7alpv015.apps.googleusercontent.com")
                 .requestEmail()
+                .requestId()
                 .build();
         gsc= GoogleSignIn.getClient(this,gso);
 
@@ -68,6 +69,7 @@ public class SignIn extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+
                             navigateToMainActivity();
                         }else{
                             Toast.makeText(SignIn.this, "Authentication Failed", Toast.LENGTH_SHORT).show();

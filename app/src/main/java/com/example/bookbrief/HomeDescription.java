@@ -47,6 +47,7 @@ public class HomeDescription extends AppCompatActivity {
             isLiked = !isLiked;
             Toast.makeText(this, "Like clicked", Toast.LENGTH_SHORT).show();
 
+
             // Update the like status in your data source (e.g., a database or server)
 
         });
