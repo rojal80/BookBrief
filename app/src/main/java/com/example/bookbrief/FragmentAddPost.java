@@ -135,7 +135,7 @@ public class FragmentAddPost extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle errors here (e.g., show an error message)
-                        showToast("Volley POST Request Error: " + error.getMessage());
+                        showToast("Enter both fields " + error.getMessage());
                     }
                 }
         );

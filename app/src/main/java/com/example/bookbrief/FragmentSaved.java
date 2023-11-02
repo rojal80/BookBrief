@@ -53,10 +53,10 @@ public class FragmentSaved extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter= new RecyclerAdapterSaved(this,arrDetails);
-        recyclerView.setAdapter(adapter);
         // Initialize the requestQueue
         requestQueue = Volley.newRequestQueue(requireContext());
+        adapter= new RecyclerAdapterSaved(this,arrDetails);
+        recyclerView.setAdapter(adapter);
 
         // Make a Volley GET request
         getUserId();
@@ -161,7 +161,9 @@ public class FragmentSaved extends Fragment {
                 String photo = imageObject.getString("photo");
 
                 JSONObject userObject = jsonObject.getJSONObject("user");
-                String name = userObject.getString("name");
+                String name = imageObject.getString("name");
+
+
 
                 // Create a new ContentModel from JSON data
                 ContentModel contentModel = new ContentModel(title, description,blogId,name,photo);

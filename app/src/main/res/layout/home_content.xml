@@ -80,10 +80,6 @@
                     android:layout_marginLeft="200dp"
                     android:layout_marginRight="40dp"
                     android:src="@drawable/save"/>
-
-
-
-
             </LinearLayout>
 
         </LinearLayout>

@@ -138,6 +138,18 @@ public class RecyclerAdapterLibrary extends RecyclerView.Adapter<RecyclerAdapter
                         }
 
                         updateBlog(blogId,updateData);
+                        // Update the data in arrDetails
+                        ContentModel updatedContentModel = arrDetails.get(position);
+                        updatedContentModel.setTitle(title);
+                        updatedContentModel.setDescription(description);
+
+                        // Update the views in the current item in the RecyclerView
+                        holder.txt1.setText(title);
+
+                        Toast.makeText(holder.txt1.getContext(), "Data updated successfully", Toast.LENGTH_SHORT).show();
+
+                        //dismiss popup screen after updating data
+                        dialogplus.dismiss();
 
 
                     });
@@ -154,18 +166,30 @@ public class RecyclerAdapterLibrary extends RecyclerView.Adapter<RecyclerAdapter
                 dialogplus.show();
             }
         });
-
         holder.deletepost.setOnClickListener(view -> {
-
             AlertDialog.Builder builder = new AlertDialog.Builder(holder.txt1.getContext());
             builder.setTitle("Are you sure you want to delete?");
-            builder.setMessage("Deleted data can't be undo.");
+            builder.setMessage("Deleted data can't be undone.");
             builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    //delete http request
-                    deleteBlog(arrDetails.get(position).getBlogId());
+                    int adapterPosition = holder.getAdapterPosition();
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        // Delete the item using the correct position
+                        String deletedBlogId = arrDetails.get(adapterPosition).getBlogId();
 
+                        // Send an HTTP request to delete the item
+                        deleteBlog(deletedBlogId);
+
+                        // Remove the item from the list
+                        arrDetails.remove(adapterPosition);
+
+                        // Notify the adapter that the item has been removed
+                        notifyItemRemoved(adapterPosition);
+
+                        // Display a toast message
+                        Toast.makeText(holder.txt1.getContext(), "Post has been deleted.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -175,9 +199,35 @@ public class RecyclerAdapterLibrary extends RecyclerView.Adapter<RecyclerAdapter
                 }
             });
             builder.show();
-
-
         });
+
+
+
+//        holder.deletepost.setOnClickListener(view -> {
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(holder.txt1.getContext());
+//            builder.setTitle("Are you sure you want to delete?");
+//            builder.setMessage("Deleted data can't be undo.");
+//            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    Toast.makeText(holder.txt1.getContext(), "Post has been deleted.", Toast.LENGTH_SHORT).show();
+//
+//                    //delete http request
+//                    deleteBlog(arrDetails.get(position).getBlogId());
+//
+//                }
+//            });
+//            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    Toast.makeText(holder.txt1.getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//            builder.show();
+//
+//
+//        });
     }
 
     @Override

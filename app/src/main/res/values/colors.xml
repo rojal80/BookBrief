@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="iconcolor">#59585F</color>
     <color name="primary_top">#5271ff</color>
+    <color name="savedColor">#000000</color> <!-- Black color -->
+
+
 </resources>

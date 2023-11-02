@@ -25,7 +25,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerAdapterSaved extends RecyclerView.Adapter<RecyclerAdapterSaved.ViewHolder> implements Filterable {
     FragmentSaved context;
-    private Fragment fragment;
 
     ArrayList<ContentModel> arrDetails;
     ArrayList<ContentModel>backup;
@@ -33,7 +32,7 @@ public class RecyclerAdapterSaved extends RecyclerView.Adapter<RecyclerAdapterSa
 
     public RecyclerAdapterSaved(FragmentSaved context, ArrayList<ContentModel> arrDetails){
         this.context=context;
-        this.fragment=fragment;
+
         this.arrDetails=arrDetails;
         backup=new ArrayList<>(arrDetails);
     }
@@ -54,7 +53,9 @@ public class RecyclerAdapterSaved extends RecyclerView.Adapter<RecyclerAdapterSa
 
 
         holder.txt1.setText(arrDetails.get(position).getTitle());
-        holder.userName.setText(arrDetails.get(position).getUserName());
+//        holder.userName.setText(arrDetails.get(position).getUserName());
+        String userName = arrDetails.get(position).getUserName(); // Get the correct userName
+        holder.userName.setText(userName);
         String imageUrl = arrDetails.get(position).getImage();
         Picasso.get().load(imageUrl).into(holder.photo);
 

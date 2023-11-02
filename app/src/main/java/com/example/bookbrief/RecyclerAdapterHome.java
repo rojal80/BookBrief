@@ -75,6 +75,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
         holder.userName.setText(arrDetails.get(position).getUserName());
         String imageUrl = arrDetails.get(position).getImage();
         Picasso.get().load(imageUrl).into(holder.photo);
+        holder.userName.setText(arrDetails.get(position).getUserName());
 
 
         holder.cardHome.setOnClickListener(view -> {
@@ -92,7 +93,7 @@ public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHom
             public void onClick(View view) {
 
 
-//                Toast.makeText(view.getContext(), "Post saved!"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Post has been saved!", Toast.LENGTH_SHORT).show();
                 getUserId(position);
             }
 
