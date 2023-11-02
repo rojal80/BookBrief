@@ -40,7 +40,7 @@
         android:minLines="4" />
 
     <Button
-        android:id="@+id/btnPost"
+        android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

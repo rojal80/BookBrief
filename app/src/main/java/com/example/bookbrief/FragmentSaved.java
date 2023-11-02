@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.bookbrief.ContentModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +36,7 @@ public class FragmentSaved extends Fragment {
     private RecyclerAdapterSaved adapter;
     private RequestQueue requestQueue;
 
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
     public FragmentSaved() {
@@ -48,24 +52,74 @@ public class FragmentSaved extends Fragment {
         recyclerView=view1.findViewById(R.id.recyclerContent);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        arrDetails.add(new ContentModel("This is Life","We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us.We should enjoy every small things that are around us."));
-//        arrDetails.add(new ContentModel("Love of Life", "We should enjoy every small things that are around us."));
-//        arrDetails.add(new ContentModel(" My Life", "We should enjoy every small things that are around us."));
-//        arrDetails.add(new ContentModel("Manifestation", "We should enjoy every small things that are around us."));
+
         adapter= new RecyclerAdapterSaved(this,arrDetails);
         recyclerView.setAdapter(adapter);
         // Initialize the requestQueue
         requestQueue = Volley.newRequestQueue(requireContext());
 
         // Make a Volley GET request
-        makeVolleyGetRequest();
+        getUserId();
         return view1;
+    }
+
+    private void getUserId() {
+        String email = currentUser.getEmail();
+        String url = "https://summary-blog.vercel.app/api/users?email=" + email; // Replace with your API endpoint
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Handle the JSON response here
+
+                        String id = extractIdFromJson(response.toString());
+
+
+
+                        String postUrl = "https://summary-blog.vercel.app/api/blogs"; // Replace with your POST endpoin
+                        getSavedBlogs(id);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle errors here (e.g., show an error message)
+                        showToast("Volley Request Error: " + error.getMessage());
+                    }
+                }
+        );
+        requestQueue.add(jsonArrayRequest);
+
+    }
+
+    public String extractIdFromJson(String jsonResponse) {
+        try {
+            // Parse the JSON array
+            JSONArray jsonArray = new JSONArray(jsonResponse);
+
+            if (jsonArray.length() > 0) {
+                // Get the first object from the array
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                // Extract the "_id" field from the object
+                return jsonObject.getString("_id");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            // Handle JSON parsing errors here
+        }
+
+        return null; // Return null if the ID couldn't be extracted
     }
 
 
     // Create a method to make a Volley GET request
-    private void makeVolleyGetRequest() {
-        String url = "https://api.example.com/data"; // Replace with your API endpoint
+    private void getSavedBlogs(String id) {
+        String url = "https://summary-blog.vercel.app/api/savedBlogs/"+id; // Replace with your API endpoint
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -97,11 +151,20 @@ public class FragmentSaved extends Fragment {
         for (int i = 0; i < response.length(); i++) {
             try {
                 JSONObject jsonObject = response.getJSONObject(i);
-                String title = jsonObject.getString("title");
-                String description = jsonObject.getString("description");
+                JSONObject dataObject=jsonObject.getJSONObject("blog");
+
+                String title = dataObject.getString("title");
+                String description = dataObject.getString("description");
+                String blogId=dataObject.getString("_id");
+
+                JSONObject imageObject=dataObject.getJSONObject("user");
+                String photo = imageObject.getString("photo");
+
+                JSONObject userObject = jsonObject.getJSONObject("user");
+                String name = userObject.getString("name");
 
                 // Create a new ContentModel from JSON data
-                ContentModel contentModel = new ContentModel(title, description);
+                ContentModel contentModel = new ContentModel(title, description,blogId,name,photo);
                 arrDetails.add(contentModel);
 
             } catch (JSONException e) {

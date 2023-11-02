@@ -48,26 +48,24 @@ public class FragmentHome extends Fragment {
     private RequestQueue requestQueue;
 
 
-
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         View view1 = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view1.findViewById(R.id.recyclerContent);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        adapter = new RecyclerAdapterHome(this, arrDetails);
-        recyclerView.setAdapter(adapter);
         requestQueue = Volley.newRequestQueue(requireContext());
 
+        adapter = new RecyclerAdapterHome(this, arrDetails,requestQueue,currentUser.getEmail());
+        recyclerView.setAdapter(adapter);
+
         // Make a Volley GET request
-        makeVolleyGetRequest();
+        getBlogs();
         checkIfUserExists();
         return view1;
     }
@@ -113,9 +111,9 @@ public class FragmentHome extends Fragment {
                         if (response.length() == 0) {
                             JSONObject postData = new JSONObject();
                             try {
-                                postData.put("name",currentUser.getDisplayName() );
-                                postData.put("email",currentUser.getEmail() );
-                                postData.put("photo",currentUser.getPhotoUrl() );
+                                postData.put("name", currentUser.getDisplayName());
+                                postData.put("email", currentUser.getEmail());
+                                postData.put("photo", currentUser.getPhotoUrl());
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -170,8 +168,8 @@ public class FragmentHome extends Fragment {
 
 
     // Create a method to make a Volley GET request
-    private void makeVolleyGetRequest() {
-        String url = "https://summary-blog.vercel.app/api/blogs"; // Replace with your API endpoint
+    private void getBlogs() {
+        String url = "https://summary-blog.vercel.app/api/blogs?status=accepted"; // Replace with your API endpoint
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -203,9 +201,14 @@ public class FragmentHome extends Fragment {
                 JSONObject jsonObject = response.getJSONObject(i);
                 String title = jsonObject.getString("title");
                 String description = jsonObject.getString("description");
+                String blogId = jsonObject.getString("_id");
+
+                JSONObject userObject = jsonObject.getJSONObject("user");
+                String name = userObject.getString("name");
+                String photo = userObject.getString("photo");
 
                 // Create a new ContentModel from JSON data
-                ContentModel contentModel = new ContentModel(title, description);
+                ContentModel contentModel = new ContentModel(title, description, blogId, name, photo);
                 arrDetails.add(contentModel);
 
             } catch (JSONException e) {
@@ -218,11 +221,10 @@ public class FragmentHome extends Fragment {
     }
 
 
-    public void addContent(ContentModel newContent) {
-        arrDetails.add(newContent);
-        adapter.notifyDataSetChanged();
-        showToast("Successfully Posted");
-    }
+//    public void addContent(ContentModel newContent) {
+//        arrDetails.add(newContent);
+//        adapter.notifyDataSetChanged();
+//    }
 
     private void showToast(String message) {
         if (getContext() != null) {

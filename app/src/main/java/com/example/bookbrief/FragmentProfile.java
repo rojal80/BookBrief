@@ -64,12 +64,6 @@ public class FragmentProfile extends Fragment {
         String displayName = currentUser.getDisplayName();
         photoUrl = currentUser.getPhotoUrl();
 
-
-// Load the user's profile picture using Picasso
-//        if (photoUrl != null) {
-//            Picasso.get().load(photoUrl).into(pic);
-//        }
-
         emailid.setText(email);
         userName.setText(displayName);
         pic.setImageURI(photoUrl);

@@ -39,7 +39,6 @@ public class FragmentAddPost extends Fragment {
 
 
     private RequestQueue requestQueue;
-
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     public FragmentAddPost() {
@@ -60,32 +59,15 @@ public class FragmentAddPost extends Fragment {
         requestQueue = Volley.newRequestQueue(requireContext());
 
 
+
+        //post button click listener
         btnPost.setOnClickListener(view -> {
             Log.d("FragmentAddPost", "Post button clicked");
-            // Collect the title and description from EditTexts
             String title = editTitle.getText().toString();
             String description = editDescription.getText().toString();
 
-
             //this function gets the user id
             getUserId(title, description);
-
-            // Create a JSON object to send in the POST request
-
-//            JSONObject postObject = new JSONObject();
-//            try {
-//                postObject.put("title", title);
-//                postObject.put("description", description);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-
-            // Specify the URL for your POST request
-            String postUrl = "https://summary-blog.vercel.app/api/blogs"; // Replace with your API endpoint
-//
-//            // Make a POST request using Volley
-//            makeVolleyPostRequest(postUrl, postObject);
-
 
         });
         return view1;

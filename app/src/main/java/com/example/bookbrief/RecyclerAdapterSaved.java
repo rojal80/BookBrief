@@ -17,7 +17,11 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerAdapterSaved extends RecyclerView.Adapter<RecyclerAdapterSaved.ViewHolder> implements Filterable {
     FragmentSaved context;
@@ -50,6 +54,10 @@ public class RecyclerAdapterSaved extends RecyclerView.Adapter<RecyclerAdapterSa
 
 
         holder.txt1.setText(arrDetails.get(position).getTitle());
+        holder.userName.setText(arrDetails.get(position).getUserName());
+        String imageUrl = arrDetails.get(position).getImage();
+        Picasso.get().load(imageUrl).into(holder.photo);
+
 
 
 
@@ -62,51 +70,7 @@ public class RecyclerAdapterSaved extends RecyclerView.Adapter<RecyclerAdapterSa
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             view.getContext().startActivity(intent);
         });
-//
-//        holder.editpost.setOnClickListener(view -> {
-//            final DialogPlus dialogplus= DialogPlus.newDialog(holder.txt1.getContext())
-//                    .setContentHolder(new com.orhanobut.dialogplus.ViewHolder(R.layout.update_popup))
-//                    .setExpanded(true,1200).create();
-//
-//            EditText editTitle = (EditText) dialogplus.findViewById(R.id.editTitle);
-//            EditText editDescription = (EditText) dialogplus.findViewById(R.id.editDescription);
-//            ImageView editpost= (ImageView) dialogplus.findViewById(R.id.editpost);
-//            // Get the position of the clicked item
-//            int itemPosition = holder.getAdapterPosition();
-//            ContentModel contentModel = arrDetails.get(itemPosition);
-//
-//            // Populate the EditText fields with existing data
-//            editTitle.setText(contentModel.getTitle());
-//            editDescription.setText(contentModel.getDescription());
-//
-//            // Handle the editpost ImageView click here to save the edited data
-////            editpost.setOnClickListener(view1 -> {
-////
-////            });
-//
-//            dialogplus.show();
-//        });
-//
-//        holder.deletepost.setOnClickListener(view -> {
-//            AlertDialog.Builder builder=new AlertDialog.Builder(holder.txt1.getContext());
-//            builder.setTitle("Are you sure you want to delete?");
-//            builder.setMessage("Deleted data can't be undo.");
-//            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                }
-//            });
-//            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    Toast.makeText(holder.txt1.getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//            builder.show();
-//
-//
-//        });
+
     }
 
     @Override
@@ -147,18 +111,24 @@ public class RecyclerAdapterSaved extends RecyclerView.Adapter<RecyclerAdapterSa
     };
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView txt1,txt2;
+        TextView txt1,txt2,userName;
         CardView cardHome;
         ImageView saveimage;
+
+        CircleImageView photo;
+
         public ViewHolder(View itemView){
 
             super(itemView);
             txt1=itemView.findViewById(R.id.txt1);
             txt2=itemView.findViewById(R.id.txt2);
             cardHome=itemView.findViewById(R.id.cardHome);
-//            editpost=itemView.findViewById(R.id.editpost);
-//            deletepost=itemView.findViewById(R.id.deletepost);
+
             saveimage=itemView.findViewById(R.id.saveImage);
+
+            userName=itemView.findViewById(R.id.userProfileNameTextView);
+            photo=itemView.findViewById(R.id.profileImage);
+
         }
 
     }
