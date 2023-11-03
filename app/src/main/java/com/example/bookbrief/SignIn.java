@@ -91,11 +91,11 @@ public class SignIn extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        // Redirect to the sign-in page
-        Intent intent = new Intent(this, SignIn.class);
-        startActivity(intent);
-        finish();
-    }
+//    private void logout() {
+//        FirebaseAuth.getInstance().signOut();
+//        // Redirect to the sign-in page
+//        Intent intent = new Intent(this, SignIn.class);
+//        startActivity(intent);
+//        finish();
+//    }
 }

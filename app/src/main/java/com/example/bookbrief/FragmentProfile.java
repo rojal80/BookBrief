@@ -55,6 +55,8 @@ public class FragmentProfile extends Fragment {
         logoutbtn.setOnClickListener(view -> signOut());
 
 
+
+
         emailid = v.findViewById(R.id.emailid);
         userName = v.findViewById(R.id.userName);
         pic = v.findViewById(R.id.pic);
@@ -76,9 +78,14 @@ public class FragmentProfile extends Fragment {
 
     private void signOut() {
         FirebaseAuth.getInstance().signOut();
-        navigateToSignInActivity();
-//        gsc.signOut()
-//                .addOnCompleteListener(requireActivity(), task -> navigateToSignInActivity());
+        // Sign out from Google Sign-In
+        GoogleSignIn.getClient(requireContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build())
+                .signOut()
+                .addOnCompleteListener(requireActivity(), task -> {
+                    // After both Firebase and Google Sign-In sign out, navigate to the sign-in activity
+                    navigateToSignInActivity();
+                });
+
     }
 
     private void navigateToSignInActivity() {
